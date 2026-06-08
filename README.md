@@ -138,7 +138,7 @@ pip install -r requirements.txt
 
 **From the repo root (recommended):**
 ```bash
-streamlit run app.py
+streamlit run dashboard/app.py
 ```
 
 **Or from the dashboard folder:**
@@ -158,7 +158,7 @@ The app will open at `http://localhost:8501`.
 3. Click **"New app"** and select:
    - **Repository:** your GitHub repo
    - **Branch:** `main`
-   - **Main file path:** `app.py`
+   - **Main file path:** `dashboard/app.py`
 4. Click **Deploy**. Streamlit Cloud will install packages from `requirements.txt` automatically.
 
 > **Note:** The `models/saved_models/*.pkl` files and `data/processed/final_dataset.csv` must be committed to GitHub for the deployed app to function.
