@@ -1,6 +1,6 @@
 # Predicting Customer Adoption Propensity Using Spending Behaviour
 
-A machine learning dashboard prototype that predicts whether a bank customer is likely to accept a credit card offer, built as a Final Year Project (FYP).
+A machine learning dashboard prototype that predicts the likelihood of a bank customer accepting a credit card offer, built as a Final Year Project (FYP).
 
 ---
 
@@ -10,6 +10,8 @@ A machine learning dashboard prototype that predicts whether a bank customer is 
 Access the deployed dashboard here:
 
 [Customer Adoption Propensity Dashboard](https://customer-adoption-propensity.streamlit.app/)
+
+No installation required — the dashboard can be accessed directly through the web browser.
 
 This interactive dashboard allows users to:
 
@@ -44,7 +46,7 @@ It is **only** a prototype for **marketing response prediction** — predicting 
 ## 📁 Folder Structure
 
 ```
-FYP_Project/
+customer-adoption-propensity-dashboard/
 ├── app.py                          # Root-level Streamlit entry point (for Streamlit Cloud)
 ├── requirements.txt                # Python dependencies
 ├── README.md                       # This file
@@ -54,7 +56,6 @@ FYP_Project/
 │   ├── app.py                      # Local entry point (run from dashboard/)
 │   ├── styles.css                  # Custom UI styling
 │   ├── model_results.csv           # Model comparison results for evaluation tab
-│   ├── dashboard_design_brief.md   # UI/UX design notes
 │   └── tabs/                       # Individual tab modules
 │       ├── __init__.py
 │       ├── overview.py
@@ -192,11 +193,11 @@ The deployment automatically installs dependencies from `requirements.txt`.
 
 ## 👩‍💻 Author
 
-**Joanna Jorise**  
+**Joanna Jorise**
 82623
-Bachelor of Computer Science with Honours (Computational Science) 
-Universiti Malaysia Sarawak (UNIMAS)  
-82623@siswa.unimas.my
+Bachelor of Computer Science with Honours (Computational Science)
+Universiti Malaysia Sarawak (UNIMAS)
+[82623@siswa.unimas.my](mailto:82623@siswa.unimas.my)
 
 ---
 
