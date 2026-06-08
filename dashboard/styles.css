@@ -418,12 +418,12 @@ header[data-testid="stHeader"] {
 }
 
 .hero-subtitle {
-    font-size: 0.98rem;
-    color: rgba(255, 255, 255, 0.88);
-    margin: 0;
-    font-weight: 400;
-    max-width: 850px;
-    line-height: 1.5;
+    font-size: 0.98rem !important;
+    color: #f8fafc !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+    max-width: 850px !important;
+    line-height: 1.5 !important;
 }
 
 /* ── Project Summary Card ─────────────────────── */
