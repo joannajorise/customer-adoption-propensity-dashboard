@@ -4,6 +4,22 @@ A machine learning dashboard prototype that predicts whether a bank customer is 
 
 ---
 
+
+## 🌐 Live Dashboard
+
+Access the deployed dashboard here:
+
+[Customer Adoption Propensity Dashboard](https://customer-adoption-propensity.streamlit.app/)
+
+This interactive dashboard allows users to:
+
+* Predict customer credit card offer acceptance likelihood
+* Explore customer and campaign insights
+* Compare machine learning model performance
+* Support targeted marketing decision-making
+
+---
+
 ## 📌 Project Overview
 
 This project demonstrates how machine learning can support **targeted credit card offer marketing** by predicting customer response propensity. A bank marketing officer enters customer profile and campaign details into the dashboard and receives an **offer acceptance probability** along with a **marketing priority recommendation**.
@@ -113,11 +129,10 @@ The dashboard has five tabs:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-github-username>/FYP_Project.git
-cd FYP_Project
+git clone https://github.com/joannajorise/customer-adoption-propensity-dashboard.git
+cd customer-adoption-propensity-dashboard
 ```
 
-> Replace `<your-github-username>` with your actual GitHub username.
 
 ### 2. Create and activate a virtual environment
 
@@ -151,17 +166,17 @@ The app will open at `http://localhost:8501`.
 
 ---
 
-## ☁️ Deployment — Streamlit Community Cloud
+## ☁️ Deployment
 
-1. Push this repository to GitHub (ensure `venv/` and `.venv/` are excluded via `.gitignore`).
-2. Go to [share.streamlit.io](https://share.streamlit.io) and connect your GitHub account.
-3. Click **"New app"** and select:
-   - **Repository:** your GitHub repo
-   - **Branch:** `main`
-   - **Main file path:** `dashboard/app.py`
-4. Click **Deploy**. Streamlit Cloud will install packages from `requirements.txt` automatically.
+This dashboard is deployed using **Streamlit Community Cloud**.
 
-> **Note:** The `models/saved_models/*.pkl` files and `data/processed/final_dataset.csv` must be committed to GitHub for the deployed app to function.
+Deployment configuration:
+
+* **Repository:** `customer-adoption-propensity-dashboard`
+* **Branch:** `main`
+* **Main file path:** `dashboard/app.py`
+
+The deployment automatically installs dependencies from `requirements.txt`.
 
 ---
 
