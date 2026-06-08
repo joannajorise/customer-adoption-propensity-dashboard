@@ -68,8 +68,20 @@ div.stButton>button[kind="primary"] {
     box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25) !important;
 }
 
+div.stButton>button[kind="primary"] *,
+div.stButton>button[kind="primary"] p,
+div.stButton>button[kind="primary"] span {
+    color: #ffffff !important;
+}
+
 div.stButton>button[kind="primary"]:hover {
     background: #1d4ed8 !important;
+}
+
+div.stButton>button[kind="primary"]:hover *,
+div.stButton>button[kind="primary"]:hover p,
+div.stButton>button[kind="primary"]:hover span {
+    color: #ffffff !important;
 }
 
 /* Inactive tab — light ghost */
@@ -84,9 +96,21 @@ div.stButton>button[kind="secondary"] {
     transition: all 0.15s ease;
 }
 
+div.stButton>button[kind="secondary"] *,
+div.stButton>button[kind="secondary"] p,
+div.stButton>button[kind="secondary"] span {
+    color: #374151 !important;
+}
+
 div.stButton>button[kind="secondary"]:hover {
     background: #f0f4f8 !important;
     border-color: #93c5fd !important;
+    color: #1e40af !important;
+}
+
+div.stButton>button[kind="secondary"]:hover *,
+div.stButton>button[kind="secondary"]:hover p,
+div.stButton>button[kind="secondary"]:hover span {
     color: #1e40af !important;
 }
 
