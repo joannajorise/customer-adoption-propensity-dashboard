@@ -392,7 +392,6 @@ button[data-testid="baseButton-headerNoPadding"] {
 }
 
 /* ── Hide Streamlit default branding ─────────── */
-/* ── Hide Streamlit default branding ─────────── */
 #MainMenu,
 footer {
     visibility: hidden;
