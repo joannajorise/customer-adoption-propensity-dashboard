@@ -27,7 +27,7 @@ def render_data_insights(df_hist, has_plotly):
         accepted_count = int(df_hist["target"].sum())
         acceptance_rate = (accepted_count / total_records) * 100 if total_records > 0 else 0.0
 
-        st.subheader("📊 Dataset Snapshot")
+        st.markdown('<p class="section-header">Dataset Snapshot</p>', unsafe_allow_html=True)
         snap_col1, snap_col2, snap_col3 = st.columns(3)
         with snap_col1:
             st.metric("Total Records", f"{total_records:,}")
@@ -42,10 +42,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di1:
             with st.container(border=True):
-                st.subheader(
-                    "Offer Acceptance Distribution",
-                    help="The dataset is highly imbalanced — only ~5.68% of customers accepted the offer."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Offer Acceptance Distribution</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">The dataset is highly imbalanced — only ~5.68% of customers accepted the offer.</p></div>', unsafe_allow_html=True)
                 dist = df_hist["target"].value_counts().reset_index()
                 dist.columns = ["Status", "Count"]
                 dist["Status"] = dist["Status"].map({0: "Not Accepted", 1: "Accepted"})
@@ -66,10 +63,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di2:
             with st.container(border=True):
-                st.subheader(
-                    "Acceptance Rate by Reward",
-                    help="Reward type may influence customer willingness to accept an offer."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Acceptance Rate by Reward</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Reward type may influence customer willingness to accept an offer.</p></div>', unsafe_allow_html=True)
                 reward_acc = df_hist.groupby("Reward")["target"].mean().reset_index()
                 reward_acc.columns = ["Reward", "Acceptance Rate"]
                 reward_acc["Acceptance Rate %"] = reward_acc["Acceptance Rate"] * 100
@@ -88,10 +82,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di3:
             with st.container(border=True):
-                st.subheader(
-                    "Acceptance Rate by Mailer Type",
-                    help="Postcard vs Letter mailers may have different response rates among customers."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Acceptance Rate by Mailer Type</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Postcard vs Letter mailers may have different response rates among customers.</p></div>', unsafe_allow_html=True)
                 mailer_acc = df_hist.groupby("Mailer Type")["target"].mean().reset_index()
                 mailer_acc.columns = ["Mailer Type", "Acceptance Rate"]
                 mailer_acc["Acceptance Rate %"] = mailer_acc["Acceptance Rate"] * 100
@@ -107,10 +98,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di4:
             with st.container(border=True):
-                st.subheader(
-                    "Acceptance Rate by Income Level",
-                    help="Customer income level may be a useful feature for targeting campaigns."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Acceptance Rate by Income Level</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Customer income level may be a useful feature for targeting campaigns.</p></div>', unsafe_allow_html=True)
                 inc_acc = df_hist.groupby("Income Level", observed=False)["target"].mean().reset_index()
                 inc_acc.columns = ["Income Level", "Acceptance Rate"]
                 inc_acc["Acceptance Rate %"] = inc_acc["Acceptance Rate"] * 100
@@ -129,10 +117,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di5:
             with st.container(border=True):
-                st.subheader(
-                    "Acceptance Rate by Credit Rating",
-                    help="Credit rating may reflect customer financial confidence and willingness to take on new products."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Acceptance Rate by Credit Rating</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Credit rating may reflect customer financial confidence and willingness to take on new products.</p></div>', unsafe_allow_html=True)
                 cr_acc = df_hist.groupby("Credit Rating", observed=False)["target"].mean().reset_index()
                 cr_acc.columns = ["Credit Rating", "Acceptance Rate"]
                 cr_acc["Acceptance Rate %"] = cr_acc["Acceptance Rate"] * 100
@@ -148,10 +133,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di6:
             with st.container(border=True):
-                st.subheader(
-                    "Average Balance by Offer Acceptance",
-                    help="Customers who accepted the offer may show different average balance patterns."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Average Balance by Offer Acceptance</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Customers who accepted the offer may show different average balance patterns.</p></div>', unsafe_allow_html=True)
                 df_hist["Status"] = df_hist["target"].map({0: "Not Accepted", 1: "Accepted"})
                 if has_plotly:
                     fig = px.box(
@@ -174,10 +156,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di7:
             with st.container(border=True):
-                st.subheader(
-                    "Quarterly Balance Trend",
-                    help="Quarterly balance trend highlights how average customer balances change over the four quarters."
-                )
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Quarterly Balance Trend</h4><p style="font-weight: 400; font-size: 0.9rem; color: #6b7280; margin-top: 0.2rem;">Quarterly balance trend highlights how average customer balances change over the four quarters.</p></div>', unsafe_allow_html=True)
                 q_cols = ["Q1 Balance", "Q2 Balance", "Q3 Balance", "Q4 Balance"]
                 q_balances = df_hist.groupby("target")[q_cols].mean().reset_index()
                 q_balances_melted = q_balances.melt(
@@ -203,7 +182,7 @@ def render_data_insights(df_hist, has_plotly):
 
         with di8:
             with st.container(border=True):
-                st.subheader("Dataset Imbalance Analysis")
+                st.markdown('<div class="info-card" style="margin-bottom: 0;"><h4>Dataset Imbalance Analysis</h4></div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
                 st.warning(
                     "💡 **Key Insight:** The dataset is highly imbalanced, with a small proportion of accepted offers. "

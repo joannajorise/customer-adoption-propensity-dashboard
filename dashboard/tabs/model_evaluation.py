@@ -15,26 +15,28 @@ def render_model_evaluation(df_results, has_plotly):
     )
 
     # Final model highlight
-    st.subheader("Final Selected Model")
-    st.info(
-        "**Threshold-tuned Logistic Regression** was selected as the final model because "
-        "it achieved the strongest overall balance between ROC-AUC, minority-class F1-score, recall, "
-        "and interpretability for marketing decision support."
-    )
+    st.markdown('<p class="section-header">Final Selected Model</p>', unsafe_allow_html=True)
+    with st.container(border=True):
+        st.info(
+            "**Threshold-tuned Logistic Regression** was selected as the final model because "
+            "it achieved the strongest overall balance between ROC-AUC, minority-class F1-score, recall, "
+            "and interpretability for marketing decision support."
+        )
 
     # Final model metrics
-    st.subheader("Final Model Metrics")
-    m1, m2, m3, m4, m5 = st.columns(5)
-    m1.metric("ROC-AUC",   "0.764")
-    m2.metric("Accuracy",  "0.86")
-    m3.metric("Precision", "0.18")
-    m4.metric("Recall",    "0.42")
-    m5.metric("F1-Score",  "0.26")
+    st.markdown('<p class="section-header">Final Model Metrics</p>', unsafe_allow_html=True)
+    with st.container(border=True):
+        m1, m2, m3, m4, m5 = st.columns(5)
+        m1.metric("ROC-AUC",   "0.764")
+        m2.metric("Accuracy",  "0.86")
+        m3.metric("Precision", "0.18")
+        m4.metric("Recall",    "0.42")
+        m5.metric("F1-Score",  "0.26")
 
-    st.divider()
+    st.markdown(" ")
 
     # Model comparison table
-    st.subheader("Model Comparison Table")
+    st.markdown('<p class="section-header">Model Comparison Table</p>', unsafe_allow_html=True)
     st.caption("All experiments across Logistic Regression, Random Forest, XGBoost, and LightGBM.")
 
     if df_results.empty:
@@ -70,24 +72,24 @@ def render_model_evaluation(df_results, has_plotly):
     st.divider()
 
     # Why this model — two-column layout
-    st.subheader("Why Logistic Regression?")
-    col_why1, col_why2 = st.columns(2)
-    with col_why1:
-        st.markdown("""
-        - **Highest ROC-AUC (0.764):** Demonstrates the strongest overall discrimination ability between accepting and non-accepting customers.
-        - **Threshold Tuning Benefit:** Applying a 0.70 threshold significantly improved precision and F1-score for the minority class compared to the default 0.50 threshold.
-        - **Transparent Interpretability:** Logistic Regression provides clear, mathematically explainable coefficients suited to a professional decision-support system.
-        """)
-    with col_why2:
-        st.markdown("""
-        - **Campaign Feature Benefit:** The full-feature model outperformed the customer-only variant, proving that campaign-specific features (reward type, mailer type) are powerful predictors.
-        - **Stronger than Alternatives:** Random Forest produced zero recall on the minority class; XGBoost and LightGBM showed lower ROC-AUC and F1-scores across all experiments.
-        """)
+    st.markdown('<p class="section-header">Why Logistic Regression?</p>', unsafe_allow_html=True)
+    with st.container(border=True):
+        col_why1, col_why2 = st.columns(2)
+        with col_why1:
+            st.markdown("""
+            - **Highest ROC-AUC (0.764):** Demonstrates the strongest overall discrimination ability between accepting and non-accepting customers.
+            - **Threshold Tuning Benefit:** Applying a 0.70 threshold significantly improved precision and F1-score for the minority class compared to the default 0.50 threshold.
+            - **Transparent Interpretability:** Logistic Regression provides clear, mathematically explainable coefficients suited to a professional decision-support system.
+            """)
+        with col_why2:
+            st.markdown("""
+            - **Campaign Feature Benefit:** The full-feature model outperformed the customer-only variant, proving that campaign-specific features (reward type, mailer type) are powerful predictors.
+            - **Stronger than Alternatives:** Random Forest produced zero recall on the minority class; XGBoost and LightGBM showed lower ROC-AUC and F1-scores across all experiments.
+            """)
 
     # ── Model comparison bar charts ───────────────
     if not df_results.empty and has_plotly:
-        st.divider()
-        st.subheader("Model Performance Charts")
+        st.markdown('<p class="section-header">Model Performance Charts</p>', unsafe_allow_html=True)
         st.caption("These charts compare model performance across experiments, with emphasis on minority-class detection.")
 
         df_plot = df_results.copy()

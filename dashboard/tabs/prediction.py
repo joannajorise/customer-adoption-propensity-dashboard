@@ -10,190 +10,193 @@ def render_prediction(model, scaler, model_columns, best_threshold, reset_form):
     st.markdown("### Customer & Campaign Details")
 
     # Group 1 — Campaign Details
-    st.markdown('<p class="section-label">Group 1 — Campaign Details</p>', unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-    with col1:
-        reward_options = ["Air Miles", "Cash Back", "Points"]
-        reward_idx = reward_options.index(st.session_state.reward) if st.session_state.reward in reward_options else 0
-        reward = st.selectbox(
-            "Reward",
-            reward_options,
-            index=reward_idx,
-            key="reward",
-            help="Type of reward offered in the campaign."
-        )
-    with col2:
-        mailer_options = ["Letter", "Postcard"]
-        mailer_idx = mailer_options.index(st.session_state.mailer_type) if st.session_state.mailer_type in mailer_options else 0
-        mailer_type = st.selectbox(
-            "Mailer Type",
-            mailer_options,
-            index=mailer_idx,
-            key="mailer_type",
-            help="Format used to send the credit card offer."
-        )
+    with st.container(border=True):
+        st.markdown('<p class="section-label">Group 1 — Campaign Details</p>', unsafe_allow_html=True)
+        col1, col2 = st.columns(2)
+        with col1:
+            reward_options = ["Air Miles", "Cash Back", "Points"]
+            reward_idx = reward_options.index(st.session_state.reward) if st.session_state.reward in reward_options else 0
+            reward = st.selectbox(
+                "Reward",
+                reward_options,
+                index=reward_idx,
+                key="reward",
+                help="Type of reward offered in the campaign."
+            )
+        with col2:
+            mailer_options = ["Letter", "Postcard"]
+            mailer_idx = mailer_options.index(st.session_state.mailer_type) if st.session_state.mailer_type in mailer_options else 0
+            mailer_type = st.selectbox(
+                "Mailer Type",
+                mailer_options,
+                index=mailer_idx,
+                key="mailer_type",
+                help="Format used to send the credit card offer."
+            )
 
-    st.markdown("---")
+    st.markdown(" ")
 
     # Group 2 — Customer Profile
-    st.markdown('<p class="section-label">Group 2 — Customer Profile</p>', unsafe_allow_html=True)
-    col3, col4, col5, col6, col7 = st.columns(5)
-    with col3:
-        income_options = ["High", "Medium", "Low"]
-        income_idx = income_options.index(st.session_state.income_level) if st.session_state.income_level in income_options else 1
-        income_level = st.radio(
-            "Income Level",
-            income_options,
-            index=income_idx,
-            key="income_level",
-            horizontal=False,
-            help="Customer income category as provided in the dataset. Exact income range is not specified."
-        )
-    with col4:
-        rating_options = ["High", "Medium", "Low"]
-        rating_idx = rating_options.index(st.session_state.credit_rating) if st.session_state.credit_rating in rating_options else 1
-        credit_rating = st.radio(
-            "Credit Rating",
-            rating_options,
-            index=rating_idx,
-            key="credit_rating",
-            horizontal=False,
-            help="Customer credit rating category as provided in the dataset."
-        )
-    with col5:
-        household_size = st.number_input(
-            "Household Size",
-            min_value=1,
-            max_value=20,
-            step=1,
-            key="household_size",
-            help="Number of people in the customer's household."
-        )
-    with col6:
-        own_home_options = ["No", "Yes"]
-        own_home_idx = own_home_options.index(st.session_state.own_home) if st.session_state.own_home in own_home_options else 0
-        own_home = st.radio(
-            "Own Your Home",
-            own_home_options,
-            index=own_home_idx,
-            key="own_home",
-            horizontal=True,
-            help="Whether the customer owns their home."
-        )
-    with col7:
-        # Dynamic Homes Owned behavior logic
-        is_disabled = (st.session_state.own_home == "No")
-        if is_disabled:
-            st.session_state.homes_owned = 0
-        else:
-            if st.session_state.homes_owned < 1:
-                st.session_state.homes_owned = 1
+    with st.container(border=True):
+        st.markdown('<p class="section-label">Group 2 — Customer Profile</p>', unsafe_allow_html=True)
+        col3, col4, col5, col6, col7 = st.columns(5)
+        with col3:
+            income_options = ["High", "Medium", "Low"]
+            income_idx = income_options.index(st.session_state.income_level) if st.session_state.income_level in income_options else 1
+            income_level = st.radio(
+                "Income Level",
+                income_options,
+                index=income_idx,
+                key="income_level",
+                horizontal=False,
+                help="Customer income category as provided in the dataset. Exact income range is not specified."
+            )
+        with col4:
+            rating_options = ["High", "Medium", "Low"]
+            rating_idx = rating_options.index(st.session_state.credit_rating) if st.session_state.credit_rating in rating_options else 1
+            credit_rating = st.radio(
+                "Credit Rating",
+                rating_options,
+                index=rating_idx,
+                key="credit_rating",
+                horizontal=False,
+                help="Customer credit rating category as provided in the dataset."
+            )
+        with col5:
+            household_size = st.number_input(
+                "Household Size",
+                min_value=1,
+                max_value=20,
+                step=1,
+                key="household_size",
+                help="Number of people in the customer's household."
+            )
+        with col6:
+            own_home_options = ["No", "Yes"]
+            own_home_idx = own_home_options.index(st.session_state.own_home) if st.session_state.own_home in own_home_options else 0
+            own_home = st.radio(
+                "Own Your Home",
+                own_home_options,
+                index=own_home_idx,
+                key="own_home",
+                horizontal=True,
+                help="Whether the customer owns their home."
+            )
+        with col7:
+            # Dynamic Homes Owned behavior logic
+            is_disabled = (st.session_state.own_home == "No")
+            if is_disabled:
+                st.session_state.homes_owned = 0
+            else:
+                if st.session_state.homes_owned < 1:
+                    st.session_state.homes_owned = 1
 
-        homes_owned = st.number_input(
-            "# Homes Owned",
-            min_value=0 if is_disabled else 1,
-            max_value=10,
-            step=1,
-            key="homes_owned",
-            disabled=is_disabled,
-            help="Number of homes owned by the customer."
-        )
+            homes_owned = st.number_input(
+                "# Homes Owned",
+                min_value=0 if is_disabled else 1,
+                max_value=10,
+                step=1,
+                key="homes_owned",
+                disabled=is_disabled,
+                help="Number of homes owned by the customer."
+            )
 
-    st.markdown("---")
+    st.markdown(" ")
 
     # Group 3 — Financial Behaviour
-    st.markdown('<p class="section-label">Group 3 — Financial Behaviour Details</p>', unsafe_allow_html=True)
-    col8, col9, col10 = st.columns(3)
-    with col8:
-        bank_accounts = st.number_input(
-            "# Bank Accounts Open",
-            min_value=0,
-            max_value=20,
-            step=1,
-            key="bank_accounts",
-            help="Number of bank accounts currently open."
-        )
-    with col9:
-        credit_cards = st.number_input(
-            "# Credit Cards Held",
-            min_value=0,
-            max_value=20,
-            step=1,
-            key="credit_cards",
-            help="Number of credit cards currently held."
-        )
-    with col10:
-        overdraft_options = ["No", "Yes"]
-        overdraft_idx = overdraft_options.index(st.session_state.overdraft) if st.session_state.overdraft in overdraft_options else 0
-        overdraft = st.radio(
-            "Overdraft Protection",
-            overdraft_options,
-            index=overdraft_idx,
-            key="overdraft",
-            horizontal=True,
-            help="Whether the customer has overdraft protection."
-        )
+    with st.container(border=True):
+        st.markdown('<p class="section-label">Group 3 — Financial Behaviour Details</p>', unsafe_allow_html=True)
+        col8, col9, col10 = st.columns(3)
+        with col8:
+            bank_accounts = st.number_input(
+                "# Bank Accounts Open",
+                min_value=0,
+                max_value=20,
+                step=1,
+                key="bank_accounts",
+                help="Number of bank accounts currently open."
+            )
+        with col9:
+            credit_cards = st.number_input(
+                "# Credit Cards Held",
+                min_value=0,
+                max_value=20,
+                step=1,
+                key="credit_cards",
+                help="Number of credit cards currently held."
+            )
+        with col10:
+            overdraft_options = ["No", "Yes"]
+            overdraft_idx = overdraft_options.index(st.session_state.overdraft) if st.session_state.overdraft in overdraft_options else 0
+            overdraft = st.radio(
+                "Overdraft Protection",
+                overdraft_options,
+                index=overdraft_idx,
+                key="overdraft",
+                horizontal=True,
+                help="Whether the customer has overdraft protection."
+            )
 
-    col11, col12, col13, col14, col15 = st.columns(5)
-    with col11:
-        avg_placeholder = st.empty()
-    with col12:
-        q1_balance = st.number_input(
-            "Q1 Balance ($)",
-            min_value=0.0,
-            value=float(st.session_state.get("q1_balance", 500.0)),
-            step=50.0,
-            format="%.2f",
-            help="Customer balance recorded for quarter 1."
-        )
-        st.session_state["q1_balance"] = q1_balance
-    with col13:
-        q2_balance = st.number_input(
-            "Q2 Balance ($)",
-            min_value=0.0,
-            value=float(st.session_state.get("q2_balance", 500.0)),
-            step=50.0,
-            format="%.2f",
-            help="Customer balance recorded for quarter 2."
-        )
-        st.session_state["q2_balance"] = q2_balance
-    with col14:
-        q3_balance = st.number_input(
-            "Q3 Balance ($)",
-            min_value=0.0,
-            value=float(st.session_state.get("q3_balance", 500.0)),
-            step=50.0,
-            format="%.2f",
-            help="Customer balance recorded for quarter 3."
-        )
-        st.session_state["q3_balance"] = q3_balance
-    with col15:
-        q4_balance = st.number_input(
-            "Q4 Balance ($)",
-            min_value=0.0,
-            value=float(st.session_state.get("q4_balance", 500.0)),
-            step=50.0,
-            format="%.2f",
-            help="Customer balance recorded for quarter 4."
-        )
-        st.session_state["q4_balance"] = q4_balance
+        col11, col12, col13, col14, col15 = st.columns(5)
+        with col11:
+            avg_placeholder = st.empty()
+        with col12:
+            q1_balance = st.number_input(
+                "Q1 Balance ($)",
+                min_value=0.0,
+                value=float(st.session_state.get("q1_balance", 500.0)),
+                step=50.0,
+                format="%.2f",
+                help="Customer balance recorded for quarter 1."
+            )
+            st.session_state["q1_balance"] = q1_balance
+        with col13:
+            q2_balance = st.number_input(
+                "Q2 Balance ($)",
+                min_value=0.0,
+                value=float(st.session_state.get("q2_balance", 500.0)),
+                step=50.0,
+                format="%.2f",
+                help="Customer balance recorded for quarter 2."
+            )
+            st.session_state["q2_balance"] = q2_balance
+        with col14:
+            q3_balance = st.number_input(
+                "Q3 Balance ($)",
+                min_value=0.0,
+                value=float(st.session_state.get("q3_balance", 500.0)),
+                step=50.0,
+                format="%.2f",
+                help="Customer balance recorded for quarter 3."
+            )
+            st.session_state["q3_balance"] = q3_balance
+        with col15:
+            q4_balance = st.number_input(
+                "Q4 Balance ($)",
+                min_value=0.0,
+                value=float(st.session_state.get("q4_balance", 500.0)),
+                step=50.0,
+                format="%.2f",
+                help="Customer balance recorded for quarter 4."
+            )
+            st.session_state["q4_balance"] = q4_balance
 
-    # Auto-calculate Average Balance from the freshly returned quarters
-    q_vals = [q1_balance, q2_balance, q3_balance, q4_balance]
-    active_qs = [q for q in q_vals if q > 0]
-    calc_avg = sum(active_qs) / len(active_qs) if active_qs else 0.0
-    st.session_state["avg_balance"] = float(calc_avg)
+        # Auto-calculate Average Balance from the freshly returned quarters
+        q_vals = [q1_balance, q2_balance, q3_balance, q4_balance]
+        active_qs = [q for q in q_vals if q > 0]
+        calc_avg = sum(active_qs) / len(active_qs) if active_qs else 0.0
+        st.session_state["avg_balance"] = float(calc_avg)
 
-    with avg_placeholder:
-        st.number_input(
-            "Average Balance ($)",
-            value=float(calc_avg),
-            format="%.2f",
-            disabled=True,
-            help="Automatically calculated from the entered non-zero quarterly balances."
-        )
+        with avg_placeholder:
+            st.number_input(
+                "Average Balance ($)",
+                value=float(calc_avg),
+                format="%.2f",
+                disabled=True,
+                help="Automatically calculated from the entered non-zero quarterly balances."
+            )
 
-    st.markdown("---")
+    st.markdown(" ")
 
     col_btn1, col_btn2 = st.columns(2)
     with col_btn1:

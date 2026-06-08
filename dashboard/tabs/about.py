@@ -8,7 +8,7 @@ def render_about():
     col1, col2 = st.columns(2)
     with col1:
         with st.container(border=True):
-            st.subheader("🎯 Dashboard Purpose")
+            st.markdown('<p class="section-header">Dashboard Purpose</p>', unsafe_allow_html=True)
             st.markdown("""
             This dashboard is a **prototype interface** that demonstrates how a trained machine learning
             model can support targeted credit card marketing decisions in a financial institution.
@@ -19,7 +19,7 @@ def render_about():
 
     with col2:
         with st.container(border=True):
-            st.subheader("🚫 What This Dashboard is NOT")
+            st.markdown('<p class="section-header">What This Dashboard is NOT</p>', unsafe_allow_html=True)
             st.error("""
             * **Not** a credit approval system
             * Does **not** assess creditworthiness
@@ -33,7 +33,7 @@ def render_about():
     col3, col4 = st.columns(2)
     with col3:
         with st.container(border=True):
-            st.subheader("👥 Intended Users")
+            st.markdown('<p class="section-header">Intended Users</p>', unsafe_allow_html=True)
             st.markdown("""
             - Bank marketing officers
             - Campaign decision-makers
@@ -45,7 +45,7 @@ def render_about():
 
     with col4:
         with st.container(border=True):
-            st.subheader("⚠️ Limitations")
+            st.markdown('<p class="section-header">Limitations</p>', unsafe_allow_html=True)
             st.markdown("""
             - **Prototype only:** Not intended for live production banking use.
             - **Historical data:** Predictions are based on patterns from past customer data and may not generalise to all future scenarios.
@@ -56,7 +56,7 @@ def render_about():
 
     # Row 3 — Dataset (full-width card)
     with st.container(border=True):
-        st.subheader("📊 Dataset")
+        st.markdown('<p class="section-header">Dataset</p>', unsafe_allow_html=True)
         st.markdown("""
         - **Name:** Credit Card Offer Acceptance Trends in Banking
         - **Target variable:** Whether a customer accepted a credit card offer (`1` = Accepted, `0` = Not Accepted)
