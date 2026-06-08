@@ -1,0 +1,11 @@
+Model,Experiment,Accuracy,Precision,Recall,F1-Score,ROC-AUC,Confusion Matrix,InterpretationLogistic Regression,Baseline,0.66,0.12,0.74,0.20,0.76,"[[2241,1154],
+[54,151]]","Achieved high recall by identifying 151 out of 205 actual acceptors, but produced many false positives."Logistic Regression,Threshold tuned,0.86,0.18,0.42,0.26,0.76,"[[3009,386],
+[118,87]]",Selected final model. Threshold tuning improved precision and F1-score while maintaining the highest ROC-AUC.Random Forest,Baseline,0.94,0.00,0.00,0.00,0.67,"[[3395,0],
+[205,0]]",High accuracy was misleading because the model failed to identify any actual acceptors.XGBoost,Baseline,0.88,0.12,0.18,0.14,0.67,"[[3137,258],
+[169,36]]","More conservative than Logistic Regression, but missed many actual acceptors."XGBoost,GridSearch + threshold tuned,0.82,0.16,0.51,0.24,0.75,"[[2832,563],
+[100,105]]","Improved recall and F1-score compared to baseline XGBoost, but still had lower F1-score than the selected Logistic Regression model."LightGBM,Baseline,0.80,0.12,0.40,0.18,0.71,"[[2786,609],
+[123,82]]","Detected more acceptors than baseline XGBoost, but precision remained low."LightGBM,GridSearch tuned,0.69,0.11,0.64,0.19,0.74,"[[2371,1024],
+[74,131]]","Achieved high recall, but produced many false positives, making it less balanced for targeted marketing."Logistic Regression,Customer-only features,0.76,0.12,0.54,0.20,0.72,"[[2615,780],
+[95,110]]","Performed worse than the full-feature Logistic Regression model, suggesting campaign features improved prediction."XGBoost,Customer-only features,0.80,0.13,0.42,0.20,0.69,"[[2804,591],
+[119,86]]",Customer-only features reduced performance compared to the full-feature XGBoost model.LightGBM,Customer-only features,0.71,0.11,0.60,0.19,0.69,"[[2429,966],
+[83,122]]",Customer-only LightGBM detected many acceptors but produced many false positives.

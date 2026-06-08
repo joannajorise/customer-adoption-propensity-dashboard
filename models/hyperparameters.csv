@@ -1,0 +1,14 @@
+File Name,Algorithm/Model,Hyperparameters (Constant),Tuning Space (Grid Search),Tuning/Threshold Method
+models/baseline/lightgbm_train.py,LGBMClassifier,"random_state=42, class_weight='balanced', n_estimators=200, learning_rate=0.05",N/A,N/A
+models/baseline/logistic_regression.py,LogisticRegression,"max_iter=1000, class_weight='balanced', random_state=42",N/A,N/A
+models/baseline/random_forest.py,RandomForestClassifier,"n_estimators=100, random_state=42, class_weight='balanced'",N/A,N/A
+models/baseline/xgboost_train.py,XGBClassifier,"eval_metric='logloss', random_state=42, scale_pos_weight=(imbalance ratio)",N/A,N/A
+models/experiments/customer_only_lightgbm.py,LGBMClassifier,"random_state=42, class_weight='balanced', n_estimators=200, learning_rate=0.03, max_depth=5, num_leaves=15",N/A,N/A
+models/experiments/customer_only_logistic_regression.py,LogisticRegression,"max_iter=1000, class_weight='balanced', random_state=42",N/A,Threshold tuning [0.2; 0.3; 0.4; 0.5; 0.6; 0.7] on F1-Score
+models/experiments/customer_only_xgboost.py,XGBClassifier,"eval_metric='logloss', random_state=42, scale_pos_weight=(imbalance ratio), colsample_bytree=1.0, learning_rate=0.03, max_depth=3, n_estimators=200, subsample=1.0",N/A,Threshold tuning [0.2; 0.3; 0.4; 0.5; 0.6; 0.7] on F1-Score
+models/saved_models/final_logistic_regression.py,LogisticRegression,"max_iter=1000, class_weight='balanced', random_state=42",N/A,Applied best threshold = 0.7
+models/tuning/tuning_lightgbm.py,LGBMClassifier,"random_state=42, class_weight='balanced', verbose=-1","n_estimators: [100, 200]; max_depth: [3, 5, -1]; learning_rate: [0.03, 0.05, 0.1]; num_leaves: [15, 31]",GridSearchCV (3-fold CV) on F1-Score
+models/tuning/tuning_logistic_regression.py,LogisticRegression,"max_iter=1000, class_weight='balanced', random_state=42",N/A,Threshold tuning [0.2; 0.3; 0.4; 0.5; 0.6; 0.7] on F1-Score
+models/tuning/tuning_random_forest.py,RandomForestClassifier,"random_state=42, class_weight='balanced'","n_estimators: [100, 200]; max_depth: [5, 10, None]; min_samples_split: [2, 5]",GridSearchCV (3-fold CV) on F1-Score
+models/tuning/tuning_threshold_xgboost.py,XGBClassifier,"eval_metric='logloss', random_state=42, scale_pos_weight=(imbalance ratio), colsample_bytree=1.0, learning_rate=0.03, max_depth=3, n_estimators=200, subsample=1.0",N/A,Threshold tuning [0.2; 0.3; 0.4; 0.5; 0.6; 0.7] on F1-Score
+models/tuning/tuning_xgboost.py,XGBClassifier,"eval_metric='logloss', random_state=42, scale_pos_weight=(imbalance ratio)","n_estimators: [100, 200]; max_depth: [3, 5, 7]; learning_rate: [0.03, 0.05, 0.1]; subsample: [0.8, 1.0]; colsample_bytree: [0.8, 1.0]",GridSearchCV (3-fold CV) on F1-Score
